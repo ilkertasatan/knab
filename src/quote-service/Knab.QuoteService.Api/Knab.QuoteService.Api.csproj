@@ -9,6 +9,21 @@
 
     <ItemGroup>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="appsettings.Development.json">
+        <DependentUpon>appsettings.json</DependentUpon>
+      </Content>
+      <Content Update="appsettings.Production.json">
+        <DependentUpon>appsettings.json</DependentUpon>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Knab.QuoteService.Application\Knab.QuoteService.Application.csproj" />
+      <ProjectReference Include="..\Knab.QuoteService.Infrastructure\Knab.QuoteService.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

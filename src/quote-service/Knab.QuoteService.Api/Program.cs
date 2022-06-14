@@ -1,25 +1,38 @@
+using HealthChecks.UI.Client;
+using Knab.QuoteService.Api.Extensions;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services
+    .AddApiControllers()
+    .AddSwagger()
+    .AddHealthCheck()
+    .AddUseCases(builder.Configuration);
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerDocumentation();
 }
 
-app.UseHttpsRedirection();
-
+app.UseRouting();
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/healthz/ready", new HealthCheckOptions
+    {
+        Predicate = check => !check.Name.Contains("Liveness"),
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
+    endpoints.MapHealthChecks("/healthz/live", new HealthCheckOptions
+    {
+        Predicate = check => check.Name.Contains("Liveness"),
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+    });
+
+    endpoints.MapControllers();
+});
 
 app.Run();
