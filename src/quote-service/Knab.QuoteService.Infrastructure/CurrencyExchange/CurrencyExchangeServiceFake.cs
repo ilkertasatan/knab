@@ -6,7 +6,7 @@ namespace Knab.QuoteService.Infrastructure.CurrencyExchange;
 
 public class CurrencyExchangeServiceFake : ICurrencyExchangeService
 {
-    public Task<ICollection<Price>> GetExchangeRate(Price actualPrice, ICollection<Currency> targetCurrencies)
+    public Task<ICollection<Price>> GetExchangeRateAsync(Price actualPrice, ICollection<Currency> targetCurrencies)
     {
         const string responseJson = @"{
             'base': 'USD',

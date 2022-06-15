@@ -21,7 +21,7 @@ public class CurrencyExchangeServiceTests
         };
         var sut = new CurrencyExchangeServiceFake();
 
-        var actualPrices = await sut.GetExchangeRate(new Price(5, Currency.Usd),
+        var actualPrices = await sut.GetExchangeRateAsync(new Price(5, Currency.Usd),
             new[]
             {
                 Currency.Aud,

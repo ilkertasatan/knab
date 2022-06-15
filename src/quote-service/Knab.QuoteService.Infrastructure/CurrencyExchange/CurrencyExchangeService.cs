@@ -6,8 +6,8 @@ namespace Knab.QuoteService.Infrastructure.CurrencyExchange;
 
 public class CurrencyExchangeService : ICurrencyExchangeService
 {
-    private const string HttpClientName = "CurrencyExchange";
-    
+    public const string HttpClientName = "CurrencyExchange";
+
     private readonly IHttpClientFactory _httpClientFactory;
 
     public CurrencyExchangeService(IHttpClientFactory httpClientFactory)
@@ -15,7 +15,7 @@ public class CurrencyExchangeService : ICurrencyExchangeService
         _httpClientFactory = httpClientFactory;
     }
     
-    public async Task<ICollection<Price>> GetExchangeRate(Price actualPrice, ICollection<Currency> targetCurrencies)
+    public async Task<ICollection<Price>> GetExchangeRateAsync(Price actualPrice, ICollection<Currency> targetCurrencies)
     {
         var httpClient = _httpClientFactory.CreateClient(HttpClientName);
         var response = await httpClient.GetAsync($"latest?symbols={string.Join(',', targetCurrencies)}&base={actualPrice.Currency.Code}");

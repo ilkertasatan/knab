@@ -4,11 +4,11 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Knab.QuoteService.Api.HealthChecks;
 
-public class ExchangeRateApiHealthCheck : IHealthCheck
+public class ExchangeRatesDataApiHealthCheck : IHealthCheck
 {
     private readonly ICurrencyExchangeService _currencyExchangeService;
 
-    public ExchangeRateApiHealthCheck(ICurrencyExchangeService currencyExchangeService)
+    public ExchangeRatesDataApiHealthCheck(ICurrencyExchangeService currencyExchangeService)
     {
         _currencyExchangeService = currencyExchangeService;
     }
@@ -17,13 +17,13 @@ public class ExchangeRateApiHealthCheck : IHealthCheck
     {
         try
         {
-            await _currencyExchangeService.GetExchangeRate(new Price(Amount: 1, Currency.Usd), new[] {Currency.Gbp});
+            await _currencyExchangeService.GetExchangeRateAsync(new Price(Amount: 1, Currency.Usd), new[] {Currency.Gbp});
         }
         catch (Exception ex)
         {
-            return HealthCheckResult.Unhealthy($"{nameof(ExchangeRateApiHealthCheck)}: Exception during check: {ex.GetType().FullName}", ex);
+            return HealthCheckResult.Unhealthy($"{nameof(ExchangeRatesDataApiHealthCheck)}: Exception during check: {ex.GetType().FullName}", ex);
         }
         
-        return HealthCheckResult.Healthy($"{nameof(ExchangeRateApiHealthCheck)}: Healthy");
+        return HealthCheckResult.Healthy($"{nameof(ExchangeRatesDataApiHealthCheck)}: Healthy");
     }
 }
