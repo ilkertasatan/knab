@@ -24,6 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\quote-service\Knab.QuoteService.Api\Knab.QuoteService.Api.csproj" />
       <ProjectReference Include="..\..\src\quote-service\Knab.QuoteService.Infrastructure\Knab.QuoteService.Infrastructure.csproj" />
     </ItemGroup>
 
