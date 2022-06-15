@@ -1,4 +1,4 @@
-﻿using Knab.QuoteService.Api.UseCases.GetQuote;
+﻿using Knab.QuoteService.Api.UseCases.V1.GetQuote;
 
 namespace Knab.QuoteService.Api.Extensions;
 

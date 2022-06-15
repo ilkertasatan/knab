@@ -13,6 +13,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Knab.QuoteService.Application\Knab.QuoteService.Application.csproj" />
+        <ProjectReference Include="..\Knab.QuoteService.Domain\Knab.QuoteService.Domain.csproj" />
     </ItemGroup>
     
 </Project>

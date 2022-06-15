@@ -4,7 +4,7 @@ using System.Text.Json.Nodes;
 
 namespace Knab.QuoteService.Infrastructure.CurrencyExchange;
 
-public class CurrencyExchangeServiceFake : ICurrencyExchangeService
+public sealed class CurrencyExchangeServiceFake : ICurrencyExchangeService
 {
     public Task<ICollection<Price>> GetExchangeRateAsync(Price actualPrice, ICollection<Currency> targetCurrencies)
     {

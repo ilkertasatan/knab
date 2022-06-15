@@ -6,9 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddApiControllers()
+    .AddVersioning()
     .AddSwagger()
     .AddHealthCheck()
-    .AddMediatR()
+    .AddValidation()
     .AddUseCases(builder.Configuration);
 
 var app = builder.Build();

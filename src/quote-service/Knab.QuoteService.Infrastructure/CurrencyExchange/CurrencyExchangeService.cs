@@ -4,7 +4,7 @@ using System.Text.Json.Nodes;
 
 namespace Knab.QuoteService.Infrastructure.CurrencyExchange;
 
-public class CurrencyExchangeService : ICurrencyExchangeService
+public sealed class CurrencyExchangeService : ICurrencyExchangeService
 {
     public const string HttpClientName = "CurrencyExchange";
 
@@ -19,9 +19,10 @@ public class CurrencyExchangeService : ICurrencyExchangeService
     {
         var httpClient = _httpClientFactory.CreateClient(HttpClientName);
         var response = await httpClient.GetAsync($"latest?symbols={string.Join(',', targetCurrencies)}&base={actualPrice.Currency.Code}");
-        
-        response.EnsureSuccessStatusCode();
 
+        if (!response.IsSuccessStatusCode)
+            return (ICollection<Price>)Enumerable.Empty<Price>();
+        
         var responseJson = await response.Content.ReadAsStringAsync();
         var rates = JsonNode.Parse(responseJson);
         

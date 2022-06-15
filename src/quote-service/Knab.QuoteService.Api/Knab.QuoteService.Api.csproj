@@ -10,6 +10,11 @@
     <ItemGroup>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
         <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.4" />
+        <PackageReference Include="Polly" Version="7.2.3" />
+        <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.6" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.0.3" />
     </ItemGroup>
 
     <ItemGroup>
@@ -24,6 +29,10 @@
     <ItemGroup>
       <ProjectReference Include="..\Knab.QuoteService.Application\Knab.QuoteService.Application.csproj" />
       <ProjectReference Include="..\Knab.QuoteService.Infrastructure\Knab.QuoteService.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="UseCases\V1" />
     </ItemGroup>
 
 </Project>

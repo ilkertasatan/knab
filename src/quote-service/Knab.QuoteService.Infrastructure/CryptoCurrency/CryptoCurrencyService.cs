@@ -5,7 +5,7 @@ using System.Text.Json.Nodes;
 
 namespace Knab.QuoteService.Infrastructure.CryptoCurrency;
 
-public class CryptoCurrencyService : ICryptoCurrencyService
+public sealed class CryptoCurrencyService : ICryptoCurrencyService
 {
     public const string HttpClientName = "CryptoCurrency";
 
@@ -16,17 +16,18 @@ public class CryptoCurrencyService : ICryptoCurrencyService
         _httpClientFactory = httpClientFactory;
     }
 
-    public async Task<Quote> GetCryptoCurrencyAsync(string symbol)
+    public async Task<Quote> GetCryptoCurrencyAsync(Symbol symbol)
     {
         var httpClient = _httpClientFactory.CreateClient(HttpClientName);
         var response = await httpClient.GetAsync($"quotes/latest?symbol={symbol}");
-        
-        response.EnsureSuccessStatusCode();
 
+        if (!response.IsSuccessStatusCode)
+            return Quote.None;
+        
         var responseJson = await response.Content.ReadAsStringAsync();
         var rates = JsonNode.Parse(responseJson);
 
-        var data = rates!["data"]![symbol];
+        var data = rates!["data"]![symbol.Code.ToUpper()];
         var name = data![0]!["name"]!.GetValue<string>();
         var price = data[0]!["quote"]![Currency.Usd.Code]!["price"]!.GetValue<decimal>();
 

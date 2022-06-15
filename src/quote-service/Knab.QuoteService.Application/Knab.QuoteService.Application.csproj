@@ -6,4 +6,12 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="11.0.3" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <ProjectReference Include="..\Knab.QuoteService.Domain\Knab.QuoteService.Domain.csproj" />
+    </ItemGroup>
+    
 </Project>
