@@ -8,6 +8,7 @@ builder.Services
     .AddApiControllers()
     .AddSwagger()
     .AddHealthCheck()
+    .AddMediatR()
     .AddUseCases(builder.Configuration);
 
 var app = builder.Build();

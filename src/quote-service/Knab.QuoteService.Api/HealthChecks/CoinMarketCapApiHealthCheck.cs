@@ -1,4 +1,5 @@
 ﻿using Knab.QuoteService.Application.Services;
+using Knab.QuoteService.Domain.ValueObjects;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace Knab.QuoteService.Api.HealthChecks;
@@ -16,7 +17,7 @@ public class CoinMarketCapApiHealthCheck : IHealthCheck
     {
         try
         {
-            await _cryptoCurrencyService.GetCryptoCurrencyAsync("BTC");
+            await _cryptoCurrencyService.GetCryptoCurrencyAsync(Symbol.Bitcoin);
         }
         catch (Exception ex)
         {
