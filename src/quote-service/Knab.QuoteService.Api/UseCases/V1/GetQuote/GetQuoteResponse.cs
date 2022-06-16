@@ -39,6 +39,7 @@ public sealed class ExchangeRateModel : IEquatable<ExchangeRateModel>
     }
 
     public decimal Amount { get; }
+    
     public string Currency { get; }
 
     public bool Equals(ExchangeRateModel? other)
