@@ -29,7 +29,7 @@ public class CurrencyExchangeServiceTests : IClassFixture<ServiceCollectionFixtu
         var serviceProvider = _services.BuildServiceProvider();
         var sut = serviceProvider.GetRequiredService<ICurrencyExchangeService>();
 
-        var actualResult = await sut.GetExchangeRateAsync(new Price(1, Currency.Usd), new List<Currency> {Currency.Eur});
+        var actualResult = await sut.GetExchangeRateAsync(new Money(1, Currency.Usd), new List<Currency> {Currency.Eur});
 
         actualResult.Should().NotBeEmpty().And.HaveCountGreaterThan(0);
     } 

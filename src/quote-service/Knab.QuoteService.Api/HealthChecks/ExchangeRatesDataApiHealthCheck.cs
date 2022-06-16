@@ -17,7 +17,7 @@ public class ExchangeRatesDataApiHealthCheck : IHealthCheck
     {
         try
         {
-            await _currencyExchangeService.GetExchangeRateAsync(new Price(Amount: 1, Currency.Usd), new[] {Currency.Gbp});
+            await _currencyExchangeService.GetExchangeRateAsync(new Money(Amount: 1, Currency.Usd), new[] {Currency.Gbp});
         }
         catch (Exception ex)
         {

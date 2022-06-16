@@ -6,7 +6,7 @@ namespace Knab.QuoteService.Infrastructure.CurrencyExchange;
 
 public sealed class CurrencyExchangeServiceFake : ICurrencyExchangeService
 {
-    public Task<ICollection<Price>> GetExchangeRateAsync(Price actualPrice, ICollection<Currency> targetCurrencies)
+    public Task<ICollection<Money>> GetExchangeRateAsync(Money actualMoney, ICollection<Currency> targetCurrencies)
     {
         const string responseJson = @"{
             'base': 'USD',
@@ -21,11 +21,11 @@ public sealed class CurrencyExchangeServiceFake : ICurrencyExchangeService
         'success': true}";
         var rates = JsonNode.Parse(responseJson.Replace("'","\""));
         
-        ICollection<Price> prices = new List<Price>();
+        ICollection<Money> prices = new List<Money>();
         foreach (var currency in targetCurrencies)
         {
             var rate = rates!["rates"]![currency.Code]!.GetValue<decimal>();
-            prices.Add(actualPrice.Convert(rate, currency));
+            prices.Add(actualMoney.Convert(rate, currency));
         }
         
         return Task.FromResult(prices);

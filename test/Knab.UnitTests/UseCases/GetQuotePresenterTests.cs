@@ -14,7 +14,7 @@ public class GetQuotePresenterTests
     {
         var sut = new GetQuotePresenter();
 
-        sut.Ok(new Quote("Bitcoin", Symbol.Bitcoin, new Price(Amount: 1, Currency.Usd)));
+        sut.Ok(new Quote("Bitcoin", Symbol.Bitcoin, new Money(Amount: 1, Currency.Usd)));
 
         sut.ViewModel.Should().BeOfType<OkObjectResult>();
     }

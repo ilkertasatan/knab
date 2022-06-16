@@ -33,7 +33,7 @@ public class CryptoCurrencyServiceTests : IClassFixture<ServiceCollectionFixture
 
         actualResult.Name.Should().Be("Bitcoin");
         actualResult.Symbol.Should().Be(Symbol.Bitcoin);
-        actualResult.Price.Should().NotBe(0);
+        actualResult.Money.Should().NotBe(0);
     }
 
 

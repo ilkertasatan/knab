@@ -2,40 +2,50 @@ namespace Knab.QuoteService.Api.UseCases.V1.GetQuote;
 
 public sealed class GetQuoteResponse
 {
-    public GetQuoteResponse(string name, string symbol, decimal price, string currency)
+    public GetQuoteResponse(string name, string symbol, QuoteModel quote)
     {
         Name = name;
         Symbol = symbol.ToUpper();
-        Price = price;
-        Currency = currency;
+        Quote = quote;
         Date = DateTime.Now.ToString("yyyy-MM-dd");
         ExchangeRates = new List<ExchangeRateModel>();
     }
     
     public string Name { get; }
     public string Symbol { get; }
-    public decimal Price { get; }
-    public string Currency { get; }
+    public QuoteModel Quote { get; }
     public string Date { get; }
     public ICollection<ExchangeRateModel> ExchangeRates { get; }
 }
 
-public class ExchangeRateModel : IEquatable<ExchangeRateModel>
+public sealed class QuoteModel
 {
-    public ExchangeRateModel(decimal rate, string currency)
+    public QuoteModel(decimal price, string currency)
     {
-        Rate = rate;
+        Price = price;
         Currency = currency;
     }
 
-    public decimal Rate { get; }
+    public decimal Price { get; }
+    public string Currency { get; }
+}
+
+public sealed class ExchangeRateModel : IEquatable<ExchangeRateModel>
+{
+    public ExchangeRateModel(decimal amount, string currency)
+    {
+        Amount = amount;
+        Currency = currency;
+    }
+
+    public decimal Amount { get; }
     public string Currency { get; }
 
     public bool Equals(ExchangeRateModel? other)
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return Rate == other.Rate && Currency == other.Currency;
+        return Amount == other.Amount && Currency == other.Currency;
     }
 
     public override bool Equals(object? obj)
@@ -48,6 +58,6 @@ public class ExchangeRateModel : IEquatable<ExchangeRateModel>
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Rate, Currency);
+        return HashCode.Combine(Amount, Currency);
     }
 }

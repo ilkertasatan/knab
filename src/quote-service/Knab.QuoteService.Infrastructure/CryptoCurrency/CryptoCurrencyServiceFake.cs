@@ -29,6 +29,6 @@ public sealed class CryptoCurrencyServiceFake : ICryptoCurrencyService
         var name = data![0]!["name"]!.GetValue<string>();
         var price = data[0]!["quote"]![Currency.Usd.Code]!["price"]!.GetValue<decimal>();
 
-        return await Task.FromResult(new Quote(name, symbol, new Price(price, Currency.Usd)));
+        return await Task.FromResult(new Quote(name, symbol, new Money(price, Currency.Usd)));
     }
 }

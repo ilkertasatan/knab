@@ -18,6 +18,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerDocumentation();
 }
 
+app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
 app.UseCustomExceptionHandler();

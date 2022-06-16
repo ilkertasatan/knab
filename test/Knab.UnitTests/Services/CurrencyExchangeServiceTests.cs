@@ -10,8 +10,8 @@ public class CurrencyExchangeServiceTests
     [Fact]
     public async Task Should_Convert_Price_To_Given_Rates()
     {
-        var (amount, _) = new Price(5, Currency.Usd);
-        var expectedPrices = new List<Price>
+        var (amount, _) = new Money(5, Currency.Usd);
+        var expectedPrices = new List<Money>
         {
             new((decimal)1.457322 * amount, Currency.Aud),
             new((decimal)5.139496 * amount, Currency.Brl),
@@ -21,7 +21,7 @@ public class CurrencyExchangeServiceTests
         };
         var sut = new CurrencyExchangeServiceFake();
 
-        var actualPrices = await sut.GetExchangeRateAsync(new Price(5, Currency.Usd),
+        var actualPrices = await sut.GetExchangeRateAsync(new Money(5, Currency.Usd),
             new[]
             {
                 Currency.Aud,

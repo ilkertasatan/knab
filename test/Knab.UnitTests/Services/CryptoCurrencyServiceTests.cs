@@ -11,7 +11,7 @@ public class CryptoCurrencyServiceTests
     [Fact]
     public async Task Should_Return_CryptoCurrency()
     {
-        var expectedQuote = new Quote("Bitcoin", Symbol.Bitcoin, new Price(Amount: 21005, Currency.Usd));
+        var expectedQuote = new Quote("Bitcoin", Symbol.Bitcoin, new Money(Amount: 21005, Currency.Usd));
         var sut = new CryptoCurrencyServiceFake();
 
         var actualCryptoCurrency = await sut.GetCryptoCurrencyAsync(Symbol.Bitcoin);

@@ -6,28 +6,28 @@ public class Quote
 {
     public static readonly Quote None = new();
     
-    private readonly List<Price> _exchangeRates;
+    private readonly List<Money> _exchangeRates;
     private Quote() { }
 
-    public Quote(string name, Symbol symbol, Price price)
+    public Quote(string name, Symbol symbol, Money money)
     {
         Name = name;
         Symbol = symbol;
-        Price = price;
-        _exchangeRates = new List<Price>();
+        Money = money;
+        _exchangeRates = new List<Money>();
     }
 
     public string Name { get; }
 
     public Symbol Symbol { get; }
 
-    public Price Price { get; }
+    public Money Money { get; }
 
-    public IReadOnlyCollection<Price> ExchangeRates => _exchangeRates;
+    public IReadOnlyCollection<Money> ExchangeRates => _exchangeRates;
 
-    public void AddExchangeRate(Price price)
+    public void AddExchangeRate(Money money)
     {
-        _exchangeRates.Add(price);
+        _exchangeRates.Add(money);
     }
 
     public bool IsEmpty() => string.IsNullOrWhiteSpace(Name);

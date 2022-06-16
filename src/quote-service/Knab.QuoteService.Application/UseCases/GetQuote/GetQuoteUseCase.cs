@@ -38,7 +38,7 @@ public sealed class GetQuoteUseCase : IGetQuoteUseCase
             return;
         }
         
-        var exchangeRates = await _currencyExchangeService.GetExchangeRateAsync(cryptoCurrency.Price,
+        var exchangeRates = await _currencyExchangeService.GetExchangeRateAsync(cryptoCurrency.Money,
             targetCurrencies: new[]
             {
                 Currency.Aud,
@@ -48,7 +48,7 @@ public sealed class GetQuoteUseCase : IGetQuoteUseCase
                 Currency.Usd
             });
 
-        var quote = new Quote(cryptoCurrency.Name, cryptoCurrency.Symbol, cryptoCurrency.Price);
+        var quote = new Quote(cryptoCurrency.Name, cryptoCurrency.Symbol, cryptoCurrency.Money);
         foreach (var exchangeRate in exchangeRates)
         {
             quote.AddExchangeRate(exchangeRate);

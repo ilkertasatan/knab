@@ -30,10 +30,10 @@ public class QuotesControllerTests
     {
         _cryptoCurrencyServiceMock
             .Setup(x => x.GetCryptoCurrencyAsync(It.IsAny<Symbol>()))
-            .ReturnsAsync(new Quote("Bitcoin", Symbol.Bitcoin, new Price(Amount: 1, Currency.Usd)));
+            .ReturnsAsync(new Quote("Bitcoin", Symbol.Bitcoin, new Money(Amount: 1, Currency.Usd)));
         _currencyExchangeServiceMock
-            .Setup(x => x.GetExchangeRateAsync(It.IsAny<Price>(), It.IsAny<ICollection<Currency>>()))
-            .ReturnsAsync(new List<Price>{ new(Amount: 1, Currency.Eur) });
+            .Setup(x => x.GetExchangeRateAsync(It.IsAny<Money>(), It.IsAny<ICollection<Currency>>()))
+            .ReturnsAsync(new List<Money>{ new(Amount: 1, Currency.Eur) });
         var sut = new QuotesController(_useCase, _presenter);
 
         await sut.GetQuotesAsync(new GetQuoteRequest

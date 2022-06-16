@@ -28,17 +28,17 @@ public class GetQuoteUseCaseTests
     {
         const string expectedName = "Bitcoin";
         var expectedSymbol = Symbol.Bitcoin;
-        var expectedPrice = new Price(123, Currency.Usd);
+        var expectedPrice = new Money(123, Currency.Usd);
         var expectedRates = new List<ExchangeRateModel>
         {
-            new(rate: 1, Currency.Eur.Code)
+            new(amount: 1, Currency.Eur.Code)
         };
         _cryptoCurrencyServiceMock
             .Setup(x => x.GetCryptoCurrencyAsync(It.IsAny<Symbol>()))
             .ReturnsAsync(new Quote(expectedName, expectedSymbol, expectedPrice));
         _currencyExchangeServiceMock
-            .Setup(x => x.GetExchangeRateAsync(It.IsAny<Price>(), It.IsAny<ICollection<Currency>>()))
-            .ReturnsAsync(new List<Price>{ new(Amount: 1, Currency.Eur) });
+            .Setup(x => x.GetExchangeRateAsync(It.IsAny<Money>(), It.IsAny<ICollection<Currency>>()))
+            .ReturnsAsync(new List<Money>{ new(Amount: 1, Currency.Eur) });
         var presenter = new GetQuotePresenter();
         
         await _sut.Execute(Symbol.Bitcoin, presenter);
@@ -47,8 +47,8 @@ public class GetQuoteUseCaseTests
         var actualResponse = actualResult.Subject.Value.Should().BeOfType<GetQuoteResponse>().Subject;
         actualResponse.Name.Should().Be(expectedName);
         actualResponse.Symbol.Should().Be(expectedSymbol.Code);
-        actualResponse.Price.Should().Be(expectedPrice.Amount);
-        actualResponse.Currency.Should().Be(expectedPrice.Currency.Code);
+        actualResponse.Quote.Price.Should().Be(expectedPrice.Amount);
+        actualResponse.Quote.Currency.Should().Be(expectedPrice.Currency.Code);
         actualResponse.Date.Should().Be(DateTime.Now.ToString("yyyy-MM-dd"));
         actualResponse.ExchangeRates.Should().NotBeNull().And.HaveCountGreaterThan(0).And.Contain(expectedRates);
     }

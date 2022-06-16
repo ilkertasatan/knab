@@ -23,8 +23,7 @@ public sealed class GetQuotePresenter : IOutputPort
         var response = new GetQuoteResponse(
             quote.Name,
             quote.Symbol.Code,
-            quote.Price.Amount,
-            quote.Price.Currency.Code);
+            new QuoteModel(quote.Money.Amount, quote.Money.Currency.Code));
 
         foreach (var (amount, currency) in quote.ExchangeRates)
         {
