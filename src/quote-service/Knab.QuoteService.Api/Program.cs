@@ -6,7 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddApiControllers()
-    .AddJwtAuthentication()
     .AddVersioning()
     .AddSwagger()
     .AddHealthCheck()
@@ -19,11 +18,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerDocumentation();
 }
 
-app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCustomExceptionHandler();
-app.UseAuthentication();
-app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {

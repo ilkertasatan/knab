@@ -9,7 +9,6 @@ namespace Knab.QuoteService.Api.UseCases.V1.GetQuote;
 [ApiController]
 [ApiConventionType(typeof(DefaultApiConventions))]
 [Route("v{version:apiVersion}/[controller]")]
-[Authorize]
 public class QuotesController : ControllerBase
 {
     private readonly IGetQuoteUseCase _useCase;

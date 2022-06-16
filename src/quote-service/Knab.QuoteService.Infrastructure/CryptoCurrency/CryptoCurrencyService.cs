@@ -27,9 +27,14 @@ public sealed class CryptoCurrencyService : ICryptoCurrencyService
         var responseJson = await response.Content.ReadAsStringAsync();
         var rates = JsonNode.Parse(responseJson);
 
+        var name = string.Empty;
+        decimal price = 0;
         var data = rates!["data"]![symbol.Code.ToUpper()];
-        var name = data![0]!["name"]!.GetValue<string>();
-        var price = data[0]!["quote"]![Currency.Usd.Code]!["price"]!.GetValue<decimal>();
+        if (data != null && data.AsArray().Count > 0)
+        {
+            name = data![0]!["name"]!.GetValue<string>();
+            price = data[0]!["quote"]![Currency.Usd.Code]!["price"]!.GetValue<decimal>();    
+        }
 
         return new Quote(name, symbol, new Money(price, Currency.Usd));
     }

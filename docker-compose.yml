@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  quote-api:
+    container_name: quote-api
+    build:
+      context: .
+      dockerfile: src/quote-service/Dockerfile
+    ports:
+      - 5155:5155
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://*:5155
