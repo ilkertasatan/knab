@@ -1,5 +1,6 @@
 ﻿using Knab.QuoteService.Application.UseCases.GetQuote;
 using Knab.QuoteService.Domain.ValueObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -8,6 +9,7 @@ namespace Knab.QuoteService.Api.UseCases.V1.GetQuote;
 [ApiController]
 [ApiConventionType(typeof(DefaultApiConventions))]
 [Route("v{version:apiVersion}/[controller]")]
+[Authorize]
 public class QuotesController : ControllerBase
 {
     private readonly IGetQuoteUseCase _useCase;
