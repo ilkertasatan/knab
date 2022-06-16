@@ -20,6 +20,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 app.UseAuthorization();
+app.UseCustomExceptionHandler();
 
 app.UseEndpoints(endpoints =>
 {
