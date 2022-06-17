@@ -32,7 +32,7 @@ public static IActionResult For(ICommandResult output) =>
 
 3. I would use APIM tools in order to monitor what's happening in the services. In the past I've used DynaTrace to monitor performance issues.
 4. I've read several articles about .NET 6. I usually follow the articles on the internet.
-5. 5. I would think about my assignment having good architecture and clean and readable and maintainable code. But, I never say that my application is perfect because every application may have glitches.
+5. I would think about my assignment having good architecture and clean and readable and maintainable code. But, I never say that my application is perfect because every application may have glitches.
 6. Here is the JSON;
 
 ````json
