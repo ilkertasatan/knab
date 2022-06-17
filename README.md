@@ -43,7 +43,7 @@ This layer is responsible to communicate external services such as external apis
 #### Domain
 This layer is the heart of our application and doesn't hold any reference from the other layers. It is responsible to execute domain logic.
 
-###How to run
+### How to run
 If you would like to run the application locally, you would need an ide in order to open source codes. After opening, the project can simply be run. As a second option is Docker, the project has Docker support and it can easily be run inside docker container by running the command below which has in PowerShell script on the root folder;
 
 `./build-all.ps1`
@@ -52,7 +52,7 @@ In case you might get a security error when running the PowerShell script, you s
 
 `Set-ExecutionPolicy RemoteSigned`
 
-###How to test
+### How to test
 If you start project locally, there is Swagger documentation that you can test the application on its UI, but Swagger is only for development environment. If you start project inside docker container, you won't have swagger since it's being started as production configuration. For this scenario; you can use any rest-client tool to test.
 
 ## Conclusion
